@@ -50,7 +50,7 @@ export const ACHIEVEMENTS_DATA: AchievementItem[] = [
     certificateImg: "/certificates/cert_11.png",
     secondaryImg: "/certificates/cert_14.png",
     tags: ["Physics", "3D CAD", "Arduino", "Gyroscopic PID", "Assistive Tech"],
-    link: "https://github.com/dawarnamish28-cell/parkinsons-spoon-Data",
+    link: "https://github.com/LookWanted/parkinsons-spoon-Data",
   },
   {
     id: "macmillan-grand-finale-2025",
@@ -203,8 +203,8 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "/projects/spoon_hero.jpg",
     col2Image:
       "/projects/spoon_hero.jpg",
-    liveUrl: "https://github.com/dawarnamish28-cell/parkinsons-spoon-Data",
-    githubUrl: "https://github.com/dawarnamish28-cell/parkinsons-spoon-Data",
+    liveUrl: "https://github.com/LookWanted/parkinsons-spoon-Data",
+    githubUrl: "https://github.com/LookWanted/parkinsons-spoon-Data",
   },
   {
     id: "collab-code-for-all",
@@ -228,7 +228,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     col2Image:
       "/projects/collab_hero.jpg",
     liveUrl: "https://collabcodeforall.vercel.app",
-    githubUrl: "https://github.com/dawarnamish28-cell",
+    githubUrl: "https://github.com/LookWanted",
   },
   {
     id: "dev98os",
@@ -252,7 +252,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     col2Image:
       "/projects/dev98os_hero.jpg",
     liveUrl: "https://dev98os.vercel.app",
-    githubUrl: "https://github.com/dawarnamish28-cell",
+    githubUrl: "https://github.com/LookWanted",
   },
   {
     id: "grid-lock",
@@ -276,7 +276,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     col2Image:
       "/projects/gridlock_hero.jpg",
     liveUrl: "https://grid-lock-black.vercel.app",
-    githubUrl: "https://github.com/dawarnamish28-cell",
+    githubUrl: "https://github.com/LookWanted",
   },
   {
     id: "geometry-dash-vibe",
@@ -300,7 +300,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     col2Image:
       "/projects/geodash_hero.jpg",
     liveUrl: "https://geometry-dash-html-vibe.vercel.app",
-    githubUrl: "https://github.com/dawarnamish28-cell",
+    githubUrl: "https://github.com/LookWanted",
   },
   {
     id: "github-open-source",
@@ -323,8 +323,8 @@ export const PROJECTS_DATA: ProjectItem[] = [
       "/projects/spoon_hero.jpg",
     col2Image:
       "/projects/arduino_hero.jpg",
-    liveUrl: "https://github.com/dawarnamish28-cell?tab=repositories",
-    githubUrl: "https://github.com/dawarnamish28-cell?tab=repositories",
+    liveUrl: "https://github.com/LookWanted?tab=repositories",
+    githubUrl: "https://github.com/LookWanted?tab=repositories",
   },
 ];
 
@@ -332,7 +332,7 @@ export const PERSONAL_INFO = {
   name: "Namish Dawar",
   tagline: "a 3d creator driven by crafting striking and unforgettable projects",
   email: "dawarnamish28@gmail.com",
-  github: "https://github.com/dawarnamish28-cell",
+  github: "https://github.com/LookWanted",
   instagram: "https://www.instagram.com/namish_dawar",
   discord: "namishhaha",
   discordUrl: "https://discord.com/users/namishhaha",
