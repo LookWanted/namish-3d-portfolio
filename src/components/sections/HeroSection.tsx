@@ -1,38 +1,15 @@
-import React, { useEffect, useRef } from 'react';
-import Hls from 'hls.js';
+import React from 'react';
 import { FadeIn } from '../common/FadeIn';
 import { ContactButton } from '../common/ContactButton';
 import { Github, Instagram, Mail, Globe } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
+import { PrismHeroBackground } from '../common/PrismHeroBackground';
 
 interface HeroSectionProps {
   onOpenContact: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const src = 'https://stream.mux.com/8wrHPCX2dC3msyYU9ObwqNdm00u3ViXvOSHUMRYSEe5Q.m3u8';
-
-    if (Hls.isSupported()) {
-      const hls = new Hls({ autoStartLoad: true });
-      hls.loadSource(src);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        video.play().catch(() => {});
-      });
-      return () => hls.destroy();
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      // Safari native HLS
-      video.src = src;
-      video.play().catch(() => {});
-    }
-  }, []);
-
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -41,31 +18,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
   return (
     <section className="relative h-screen w-full flex flex-col justify-between overflow-x-clip bg-[#0C0C0C]">
 
-      {/* ── HLS VIDEO BACKGROUND ── */}
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
-      />
+      {/* ── REAL-TIME 3D PRISM LIGHT REFRACTION ANIMATION ── */}
+      <PrismHeroBackground />
 
-      {/* Top black fade — blends into the section above */}
+      {/* Subtle top/bottom blends for smooth section transitions */}
       <div
         className="absolute top-0 left-0 right-0 z-[1] pointer-events-none"
-        style={{ height: '220px', background: 'linear-gradient(to bottom, #0C0C0C 20%, transparent)' }}
+        style={{ height: '90px', background: 'linear-gradient(to bottom, #0C0C0C 10%, transparent)' }}
       />
-      {/* Bottom black fade — blends into sections below */}
       <div
         className="absolute bottom-0 left-0 right-0 z-[1] pointer-events-none"
-        style={{ height: '220px', background: 'linear-gradient(to top, #0C0C0C 20%, transparent)' }}
+        style={{ height: '70px', background: 'linear-gradient(to top, #0C0C0C 10%, transparent)' }}
       />
-      {/* Subtle dark vignette overlay so text stays readable */}
-      <div className="absolute inset-0 z-[1] pointer-events-none bg-black/30" />
 
       {/* ── 1. NAVBAR ── */}
-      <FadeIn delay={0} y={-20} as="nav" className="w-full z-20 relative">
+      <FadeIn delay={0} y={-20} as="nav" className="w-full z-20 relative" immediate={true}>
         <div className="w-full px-6 md:px-10 pt-6 md:pt-8 flex items-center justify-between">
           <button
             onClick={() => scrollToSection('about')}
@@ -100,70 +67,72 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContact }) => {
         </div>
       </FadeIn>
 
-      {/* ── 2. HERO HEADING (massive, over the video) ── */}
-      <div className="w-full text-center z-10 relative">
-        <FadeIn delay={0.15} y={40}>
-          <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full select-none pointer-events-none"
-              style={{ fontSize: 'clamp(2.5rem, 9.2vw, 11rem)' }}>
-            Hi, i&apos;m Namish
-          </h1>
-        </FadeIn>
-      </div>
-
-      {/* ── 3. BOTTOM BAR ── */}
-      <div className="w-full px-6 md:px-10 pb-7 sm:pb-8 md:pb-10 flex justify-between items-end z-20 relative">
-
-        {/* Left: tagline + quick socials */}
-        <FadeIn delay={0.35} y={20} className="max-w-[160px] sm:max-w-[220px] md:max-w-[280px]">
-          <p
-            style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
-            className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug mb-3"
-          >
-            a 3d creator driven by crafting striking and unforgettable projects
-          </p>
-
-          <div className="flex items-center gap-2.5 pt-1">
-            <a
-              href={PERSONAL_INFO.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 text-[#D7E2EA] hover:text-white flex items-center justify-center transition-all border border-white/10"
-              aria-label="GitHub Profile"
+      {/* ── 2. HERO CONTENT (Text on Left, 3D Prism on Right/Center) ── */}
+      <div className="w-full flex-1 flex flex-col justify-center px-6 md:px-14 lg:px-20 z-10 relative pointer-events-none py-12 md:py-0">
+        <div className="max-w-xl md:max-w-2xl text-left pointer-events-auto">
+          {/* Main Name / Title */}
+          <FadeIn delay={0} duration={0.4} y={15} immediate={true}>
+            <h1
+              className="font-black uppercase tracking-tight leading-[0.92] select-none text-white drop-shadow-[0_15px_40px_rgba(0,0,0,0.95)] mb-4 md:mb-6"
+              style={{ fontSize: 'clamp(3.5rem, 8vw, 8rem)' }}
             >
-              <Github className="w-3.5 h-3.5" />
-            </a>
-            <a
-              href={PERSONAL_INFO.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 text-[#D7E2EA] hover:text-pink-400 flex items-center justify-center transition-all border border-white/10"
-              aria-label="Instagram Profile"
-            >
-              <Instagram className="w-3.5 h-3.5" />
-            </a>
-            <a
-              href={`mailto:${PERSONAL_INFO.email}`}
-              className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 text-[#D7E2EA] hover:text-amber-400 flex items-center justify-center transition-all border border-white/10"
-              aria-label="Email Namish"
-            >
-              <Mail className="w-3.5 h-3.5" />
-            </a>
-            <a
-              href={PERSONAL_INFO.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/20 text-[#D7E2EA] hover:text-cyan-400 flex items-center justify-center transition-all border border-white/10"
-              aria-label="Official Website"
-            >
-              <Globe className="w-3.5 h-3.5" />
-            </a>
-          </div>
-        </FadeIn>
+              Hi, i&apos;m Namish
+            </h1>
+          </FadeIn>
 
-        {/* Right: Contact button */}
-        <FadeIn delay={0.5} y={20}>
-          <ContactButton onClick={onOpenContact} />
-        </FadeIn>
+          {/* Subtitle / Tagline */}
+          <FadeIn delay={0.08} duration={0.4} y={15} immediate={true}>
+            <p
+              className="text-white font-medium uppercase tracking-wide leading-relaxed mb-6 md:mb-8 text-base sm:text-lg md:text-xl max-w-md drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]"
+            >
+              a 3d creator driven by crafting striking and unforgettable projects
+            </p>
+          </FadeIn>
+
+          {/* CTA & Quick Socials */}
+          <FadeIn delay={0.16} duration={0.4} y={15} className="flex items-center gap-4 sm:gap-6 flex-wrap" immediate={true}>
+            <div className="drop-shadow-[0_8px_20px_rgba(0,0,0,0.8)]">
+              <ContactButton onClick={onOpenContact} />
+            </div>
+
+            <div className="flex items-center gap-2.5 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+              <a
+                href={PERSONAL_INFO.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/20 text-[#D7E2EA] hover:text-white flex items-center justify-center transition-all border border-white/10"
+                aria-label="GitHub Profile"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+              <a
+                href={PERSONAL_INFO.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/20 text-[#D7E2EA] hover:text-pink-400 flex items-center justify-center transition-all border border-white/10"
+                aria-label="Instagram Profile"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href={`mailto:${PERSONAL_INFO.email}`}
+                className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/20 text-[#D7E2EA] hover:text-amber-400 flex items-center justify-center transition-all border border-white/10"
+                aria-label="Email Namish"
+              >
+                <Mail className="w-4 h-4" />
+              </a>
+              <a
+                href={PERSONAL_INFO.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-white/5 hover:bg-white/20 text-[#D7E2EA] hover:text-cyan-400 flex items-center justify-center transition-all border border-white/10"
+                aria-label="Official Website"
+              >
+                <Globe className="w-4 h-4" />
+              </a>
+            </div>
+          </FadeIn>
+        </div>
       </div>
     </section>
   );

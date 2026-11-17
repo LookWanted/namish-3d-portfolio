@@ -10,6 +10,7 @@ interface FadeInProps {
   className?: string;
   ease?: [number, number, number, number] | string;
   as?: 'div' | 'h1' | 'h2' | 'p' | 'span' | 'section' | 'header' | 'nav' | 'button';
+  immediate?: boolean;
 }
 
 export const FadeIn: React.FC<FadeInProps> = ({
@@ -21,8 +22,26 @@ export const FadeIn: React.FC<FadeInProps> = ({
   className = '',
   ease = [0.25, 0.1, 0.25, 1],
   as = 'div',
+  immediate = false,
 }) => {
   const Component = (motion as unknown as Record<string, React.ElementType>)[as] || motion.div;
+
+  if (immediate) {
+    return (
+      <Component
+        initial={{ opacity: 0, x, y }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        transition={{
+          duration,
+          delay,
+          ease,
+        }}
+        className={className}
+      >
+        {children}
+      </Component>
+    );
+  }
 
   return (
     <Component
